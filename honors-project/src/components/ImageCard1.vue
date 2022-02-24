@@ -1,5 +1,11 @@
 <template>
+  <v-hover
+        v-slot="{ hover }"
+        open-delay="200"
+      >
   <v-card
+    :elevation="hover ? 16 : 2"
+    color="#94D2BD"
     class="mx-auto"
     max-width="344"
   >
@@ -15,6 +21,7 @@
       <v-btn
         color="orange lighten-2"
         text
+        @click="buttonClick()"
       >
         {{action}}
       </v-btn>
@@ -39,6 +46,7 @@
       </div>
     </v-expand-transition>
   </v-card>
+  </v-hover>
 </template>
 
 <script>
@@ -47,5 +55,15 @@
     data: () => ({
       show: false,
     }),
+
+    methods: {
+      buttonClick()
+      {
+        if(this.action === 'Sign Up')
+        {
+           this.$router.push('/signIn'); 
+        }
+      }
+    }
   }
 </script>
