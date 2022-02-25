@@ -25,12 +25,18 @@
       </div>
 
       <v-spacer></v-spacer>
-
-      <v-btn
-      color="#E9D8A6"
-      >
-        <h2 class="signInButton" @click="signIn()">Sign in</h2>
-      </v-btn>
+      <div v-if="!loggedIn">
+        <v-btn
+        color="#E9D8A6"
+        >
+          <h2 class="signInButton" @click="signIn()">Sign in</h2>
+        </v-btn>
+      </div>
+      <div v-else>
+        <v-btn
+         color="#E9D8A6"
+         ><h2 class="signInButton" @click="logOut()">Log Out</h2></v-btn>
+      </div>
     </v-app-bar>
 
     <v-main>
@@ -40,13 +46,29 @@
 </template>
 
 <script>
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 export default {
   name: 'App',
 
   data: () => ({
-    //
+    loggedIn: false
   }),
+
+  beforeMount(){
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user)
+            {
+              this.loggedIn = true
+            }
+            else if(!user)
+            {
+              this.loggedIn = false
+            }
+        })
+  },
 
    methods:{
    goToHome(){
@@ -55,8 +77,16 @@ export default {
 
     signIn()
       {
-        this.$router.push('/signIn'); 
-      }
+        this.$router.push('/logIn'); 
+      },
+    logOut()
+    {
+      firebase
+        .auth()
+        .signOut()
+        .then(()=> console.log("Signed out"))
+        .catch(err => alert(err.message));
+    }
   }
 
 };
