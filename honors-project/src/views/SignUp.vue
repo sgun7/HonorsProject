@@ -5,6 +5,7 @@
     <form @submit.prevent="Register">
       <input type="text" placeholder="Email" v-model="email">
       <input type="password" placeholder="Password" v-model="password">
+       <input type="text" placeholder="Small Bio" v-model="bio">
       <input type="submit" value="Register">
     </form>
   </div>
@@ -19,16 +20,22 @@ export default {
     data: () => ({
       show: false,
       email: "",
-      password: ""
+      password: "",
+      bio: ""
     }),
 
     methods: {
       Register()
       {
+         const dbStore = firebase.firestore();
           firebase
             .auth()
             .createUserWithEmailAndPassword(this.email, this.password)
-            .then(this.$router.push('/resumeUpload'))
+            .then(cred => {
+              return dbStore.collection('users').doc(cred.user.uid).set({
+                bio: this.bio
+              })
+            })
             .catch(err => alert(err.message))
       }
     }
