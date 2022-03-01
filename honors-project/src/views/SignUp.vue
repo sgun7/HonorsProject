@@ -5,7 +5,7 @@
     <form @submit.prevent="Register">
       <input type="text" placeholder="Email" v-model="email">
       <input type="password" placeholder="Password" v-model="password">
-       <input type="text" placeholder="Small Bio" v-model="bio">
+      <input type="text" placeholder="Small Bio" v-model="bio">
       <input type="submit" value="Register">
     </form>
   </div>

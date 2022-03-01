@@ -10,6 +10,8 @@
     "core-js": "^3.6.5",
     "firebase": "^9.6.7",
     "vue": "^2.6.11",
+    "vue-anka-cropper": "^1.1.0",
+    "vue-pdf-embed": "^1.1.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.4.0",
     "vuex": "^3.4.0"

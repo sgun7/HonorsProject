@@ -1,19 +1,30 @@
 <template>
   <div>
-    <h1>System List</h1>
-    <h2>{{username}}</h2>
-    <h2>{{bio}}</h2>
+    <div class="intro">
+        <h1>Resume</h1>
+
+    </div>
+    <!-- <h2>{{bio}}</h2> -->
+    <div class="pdf">
+        <vue-pdf-embed :source="url" :height="1000" :width="700"/>
+    </div>
   </div>
 </template>
 <script>
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import 'firebase/compat/storage';
+import VuePdfEmbed from 'vue-pdf-embed/dist/vue2-pdf-embed'
 
 export default {
+     components: {
+      VuePdfEmbed
+    },
     data: () => ({
         username: '',
-        bio: ''
+        bio: '',
+        url: '',
     }),
     beforeMount(){
         const dbStore = firebase.firestore();
@@ -28,8 +39,19 @@ export default {
                     this.username = user.email
                     this.bio = doc.data().bio
                 })
+
+
+                firebase.storage().ref('users/' + user.uid + '/resume.pdf').getDownloadURL().then(imgUrl => {
+                    this.url = imgUrl;
+                })
             }
         })
     },
 }
 </script>
+<style scoped>
+.pdf {
+    position: fixed;
+    right: 35%;
+}
+</style>
