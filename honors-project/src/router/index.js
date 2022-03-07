@@ -5,6 +5,7 @@ import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import ResumeUpload from '../views/ResumeUpload.vue'
 import UserPage from '../views/UserPage.vue'
+import Parser from '../views/Parser.vue'
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,11 @@ const routes = [
     path: "/userPage",
     name: "UserPage",
     component: UserPage,
+  },
+  {
+    path: "/parserPage",
+    name: "parserPage",
+    component: Parser,
   },
 ]
 

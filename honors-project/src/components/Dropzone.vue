@@ -34,7 +34,7 @@ export default {
             if(file)
             {
                 var user = firebase.auth().currentUser;
-                const storage = firebase.storage().ref('users/' + user.uid + '/resume.pdf');
+                const storage = firebase.storage().ref('users/' + user.uid + '/resume.md');
                 const storageRef = storage.put(file);
                 alert("Resume Uploaded!")
             }

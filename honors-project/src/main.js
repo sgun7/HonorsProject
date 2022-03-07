@@ -7,6 +7,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
+// import  md2json from 'md-2-json'
+import VueSimpleMarkdown from 'vue-simple-markdown'
 
 const firebaseConfig = {
   apiKey: "AIzaSyD37in6RZuLaJQPUW68PjcHiUwCkICNSWo",
@@ -28,6 +30,7 @@ new Vue({
   router,
   store,
   vuetify,
+  VueSimpleMarkdown,
   render: h => h(App)
 }).$mount('#app')
 
