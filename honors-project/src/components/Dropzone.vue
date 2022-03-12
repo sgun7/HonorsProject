@@ -31,6 +31,7 @@ export default {
         sendFile()
         {
             const file = this.$refs.file.files[0];
+            console.log(file)
             if(file)
             {
                 var user = firebase.auth().currentUser;

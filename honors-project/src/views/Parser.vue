@@ -14,6 +14,9 @@ import helloWorldJS from '../plugins/parser.js'
 // import parseMD from 'parse-md'
 import md2json from 'md-2-json'
 // import pdf from 'vue-pdf-parser'
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 export default {
   name: 'HelloWorld',
@@ -48,6 +51,17 @@ export default {
         //console.log(skillArr)
         this.skillObj = skillArr;
         console.log(this.skillObj)
+
+        var user = firebase.auth().currentUser;
+        var newRef = firebase.firestore().collection('users').doc(user.uid);
+
+        for (let i = 0; i < this.skillObj.length; i++)
+        {
+          newRef.update({
+          "skills": firebase.firestore.FieldValue.arrayUnion(this.skillObj[i])
+        });
+
+        }
 
     }
   }
