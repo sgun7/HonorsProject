@@ -9,6 +9,8 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 // import  md2json from 'md-2-json'
 import VueSimpleMarkdown from 'vue-simple-markdown'
+import axios from 'axios';
+Vue.prototype.$http = axios;
 
 const firebaseConfig = {
   apiKey: "AIzaSyD37in6RZuLaJQPUW68PjcHiUwCkICNSWo",
