@@ -25,6 +25,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 import VuePdfEmbed from 'vue-pdf-embed/dist/vue2-pdf-embed'
+import axios from 'axios'; 
 
 export default {
      components: {
@@ -32,6 +33,7 @@ export default {
     },
     data: () => ({
         username: '',
+        info: null,
         bio: '',
         url: '',
         arr: [],
@@ -75,24 +77,41 @@ export default {
         }) 
     },
     methods: {
-      async getResults () {
-         try {
-        const response = await this.$http.get(
-          "https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=f5c4a827&app_key=b6043bd309878d16edbb90773fddd666&results_per_page=10&what=English&salary_min=30000&content-type=application/json"
-        );
-        // JSON responses are automatically parsed.
-        // this.posts = response.data;
-        // var data = JSON.parse(response);
-        var json = '{"name": "Peter", "age": 22, "country": "United States"}';
+      getResults () {
+        for(const element of this.arr)
+        {
+           axios
+          .get(`https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=f5c4a827&app_key=b6043bd309878d16edbb90773fddd666&results_per_page=2&what=${element}&salary_min=30000&content-type=application/json`)
+          .then(response => {
+            var obj = JSON.parse(JSON.stringify(response));
+            this.results = obj.data.results;
+          })
+        }
+       
+      //  axios
+      // .get(`https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=f5c4a827&app_key=b6043bd309878d16edbb90773fddd666&results_per_page=2&what=${username}&salary_min=30000&content-type=application/json`)
+      // .then(response => {
+      //   var obj = JSON.parse(JSON.stringify(response));
+      //   this.results = obj.data.results;
 
-        // Converting JSON-encoded string to JS object
-        var obj = JSON.parse(JSON.stringify(response));
+      // })
+      //    try {
+      //       const response = await this.$http.get(
+      //         "https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=f5c4a827&app_key=b6043bd309878d16edbb90773fddd666&results_per_page=2&what=English&salary_min=30000&content-type=application/json"
+      //       );
+      //   // JSON responses are automatically parsed.
+      //   // this.posts = response.data;
+      //   // var data = JSON.parse(response);
+      //   var json = '{"name": "Peter", "age": 22, "country": "United States"}';
 
-        console.log(obj.data.results)
-        this.results = obj.data.results;    
-      } catch (error) {
-        console.log(error);
-      }
+      //   // Converting JSON-encoded string to JS object
+      //   var obj = JSON.parse(JSON.stringify(response));
+
+      //   console.log(obj.data.results)
+      //   this.results = obj.data.results;    
+      // } catch (error) {
+      //   console.log(error);
+      // }
       }
     }
 }
