@@ -39,8 +39,10 @@ export default {
     async showFile()
     {
         let [fileHandle] = await window.showOpenFilePicker()
+        console.log(fileHandle)
         const fileData = await fileHandle.getFile();
         let text = await fileData.text();
+        // console.log(text)
         // const { metadata, content } = parseMD(fileData)
         let objOne = md2json.parse(text)
         let json = JSON.parse(JSON.stringify(objOne))

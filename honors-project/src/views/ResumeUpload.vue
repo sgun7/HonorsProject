@@ -53,7 +53,7 @@ export default {
           var user = firebase.auth().currentUser;
           let file = e.target.files[0]
           //this.fileName = e.target.files[0].name;
-          const storage = firebase.storage().ref('users/' + user.uid + '/resume.pdf');
+          const storage = firebase.storage().ref('users/' + user.uid + '/resume.md');
           const storageRef = storage.put(file);
 
           // var storageRef = firebase.storage.ref('products/' + file.name)

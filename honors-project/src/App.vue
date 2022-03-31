@@ -33,6 +33,14 @@
         </v-btn>
       </div>
       <div v-else>
+        <v-icon
+              dark
+              right
+              x-large
+              @click="resumeUpload()"
+            >
+              mdi-upload
+        </v-icon>
         <v-btn
          color="#E9D8A6"
          ><h2 class="signInButton" @click="logOut()">Log Out</h2></v-btn>
@@ -74,6 +82,9 @@ export default {
    goToHome(){
    this.$router.push('/'); 
       },
+    resumeUpload(){
+    this.$router.push('/resumeUpload'); 
+    },
 
     signIn()
       {

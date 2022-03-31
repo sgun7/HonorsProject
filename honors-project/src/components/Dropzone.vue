@@ -20,6 +20,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
+import md2json from 'md-2-json'
 
 export default {
     data: () => ({
@@ -28,10 +29,39 @@ export default {
     }),
 
     methods: {
-        sendFile()
+        async sendFile()
         {
             const file = this.$refs.file.files[0];
-            console.log(file)
+            // const fileData = file.getFile();
+            // let text = fileData.text();
+            // console.log(text)
+            //Parse
+            let [fileHandle] = await window.showOpenFilePicker()
+            const fileData = await fileHandle.getFile();
+            let text = await fileData.text();
+            
+            // const { metadata, content } = parseMD(fileData)
+            let objOne = md2json.parse(text)
+            let json = JSON.parse(JSON.stringify(objOne))
+            // console.log((json["Skills:"].raw))
+            let skillString = (json["Skills:"].raw)
+            let convertString = skillString.replace(/\n/g, '');
+            let skillArr = convertString.split(',')
+            //console.log(skillArr)
+            this.skillObj = skillArr;
+
+            var user = firebase.auth().currentUser;
+            var newRef = firebase.firestore().collection('users').doc(user.uid);
+
+            for (let i = 0; i < this.skillObj.length; i++)
+            {
+            newRef.update({
+            "skills": firebase.firestore.FieldValue.arrayUnion(this.skillObj[i])
+            });
+
+            }
+
+            //Save the file in database
             if(file)
             {
                 var user = firebase.auth().currentUser;
