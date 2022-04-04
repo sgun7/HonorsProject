@@ -81,7 +81,7 @@ export default {
         for(const element of this.arr)
         {
            axios
-          .get(`https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=f5c4a827&app_key=b6043bd309878d16edbb90773fddd666&results_per_page=2&what=${element}&salary_min=30000&content-type=application/json`)
+          .get(`https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=f5c4a827&app_key=b6043bd309878d16edbb90773fddd666&results_per_page=4&what=${element}&salary_min=30000&content-type=application/json`)
           .then(response => {
             var obj = JSON.parse(JSON.stringify(response));
             this.results = obj.data.results; 
