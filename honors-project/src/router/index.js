@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import SignIn from '../views/SignIn.vue'
+import SignUp from '../views/SignUp.vue'
+import LogIn from '../views/LogIn.vue'
+import ResumeUpload from '../views/ResumeUpload.vue'
+import UserPage from '../views/UserPage.vue'
+import Parser from '../views/Parser.vue'
 
 Vue.use(VueRouter)
 
@@ -16,10 +20,30 @@ const routes = [
     name: 'About',
   },
   {
-    path: "/signIn",
-    name: "SignIn",
-    component: SignIn,
-},
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp,
+  },
+  {
+    path: "/logIn",
+    name: "LogIn",
+    component: LogIn,
+  },
+  {
+    path: "/resumeUpload",
+    name: "ResumeUpload",
+    component: ResumeUpload,
+  },
+  {
+    path: "/userPage",
+    name: "UserPage",
+    component: UserPage,
+  },
+  {
+    path: "/parserPage",
+    name: "parserPage",
+    component: Parser,
+  },
 ]
 
 const router = new VueRouter({

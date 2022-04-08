@@ -61,7 +61,7 @@
       {
         if(this.action === 'Sign Up')
         {
-           this.$router.push('/signIn'); 
+           this.$router.push('/signUp'); 
         }
       }
     }
