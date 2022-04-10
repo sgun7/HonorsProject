@@ -10,13 +10,20 @@
       <v-card-actions class="justify-center">
           <v-btn @click="mainLoop">Get Jobs</v-btn>
       </v-card-actions>
+        <v-spacer class="space"></v-spacer>
         <div v-if="showTable">
           <v-data-table
           :headers="headers"
           :items="results"
-          :items-per-page="5"
+          :items-per-page="10"
           class="elevation-1"
-          ></v-data-table>
+          >
+            <template #item.redirect_url="{ item }">
+            <a target="_blank" :href="item.redirect_url">
+              {{ item.redirect_url }}
+            </a>
+            </template>
+          </v-data-table>
         </div>
       <!-- <ul>
         <li v-for="item in results">Company Name: {{ item.company.display_name }}
@@ -159,5 +166,8 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+.space{
+  height: 150px;
 }
 </style>

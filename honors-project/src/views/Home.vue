@@ -13,7 +13,7 @@
           Click the button above to sign up for our program" :imageSource="require('@/assets/growth.png')"></image-card-1>
           </v-flex>
           <v-flex xs12 md4>
-            <image-card-1 title="Analytics" action="Read More" paragraph="We are constantly creating data and updating our database with the most recent analytics" :imageSource="require('@/assets/analytics.png')"></image-card-1>
+            <image-card-1 title="Analytics" paragraph="We are constantly creating data and updating our database with the most recent analytics" :imageSource="require('@/assets/analytics.png')"></image-card-1>
           </v-flex>
       </v-layout>
 
