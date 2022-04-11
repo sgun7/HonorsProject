@@ -25,20 +25,9 @@
             </template>
           </v-data-table>
         </div>
-      <!-- <ul>
-        <li v-for="item in results">Company Name: {{ item.company.display_name }}
-          Job Title: {{item.title}}
-          Location: {{item.location.display_name}}
-          URL Link: {{item.redirect_url}}
-        </li>
-      </ul> -->
     </div>
 
     </div>
-    <!-- <h2>{{bio}}</h2> -->
-    <!-- <div class="pdf">
-        <vue-pdf-embed :source="url" :height="1000" :width="700"/>
-    </div> -->
   </div>
 </template>
 <script>
