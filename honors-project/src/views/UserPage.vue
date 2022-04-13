@@ -16,8 +16,17 @@
           :headers="headers"
           :items="results"
           :items-per-page="10"
+          :search="search"
           class="elevation-1"
           >
+          <template v-slot:top>
+            <v-text-field
+              v-model="search"
+              label="Search"
+              class="mx-4"
+            >
+            </v-text-field>
+          </template>
             <template #item.redirect_url="{ item }">
             <a target="_blank" :href="item.redirect_url">
               {{ item.redirect_url }}
@@ -48,6 +57,7 @@ export default {
         bio: '',
         url: '',
         arr: [],
+        search: '',
         posts: [],
         results: [],
         showTable: false, 
