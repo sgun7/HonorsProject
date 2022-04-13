@@ -10,28 +10,33 @@
       <v-card-actions class="justify-center">
           <v-btn @click="mainLoop">Get Jobs</v-btn>
       </v-card-actions>
+        <v-spacer class="space"></v-spacer>
         <div v-if="showTable">
           <v-data-table
           :headers="headers"
           :items="results"
-          :items-per-page="5"
+          :items-per-page="10"
+          :search="search"
           class="elevation-1"
-          ></v-data-table>
+          >
+          <template v-slot:top>
+            <v-text-field
+              v-model="search"
+              label="Search"
+              class="mx-4"
+            >
+            </v-text-field>
+          </template>
+            <template #item.redirect_url="{ item }">
+            <a target="_blank" :href="item.redirect_url">
+              {{ item.redirect_url }}
+            </a>
+            </template>
+          </v-data-table>
         </div>
-      <!-- <ul>
-        <li v-for="item in results">Company Name: {{ item.company.display_name }}
-          Job Title: {{item.title}}
-          Location: {{item.location.display_name}}
-          URL Link: {{item.redirect_url}}
-        </li>
-      </ul> -->
     </div>
 
     </div>
-    <!-- <h2>{{bio}}</h2> -->
-    <!-- <div class="pdf">
-        <vue-pdf-embed :source="url" :height="1000" :width="700"/>
-    </div> -->
   </div>
 </template>
 <script>
@@ -52,6 +57,7 @@ export default {
         bio: '',
         url: '',
         arr: [],
+        search: '',
         posts: [],
         results: [],
         showTable: false, 
@@ -159,5 +165,8 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+.space{
+  height: 150px;
 }
 </style>

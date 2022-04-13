@@ -21,6 +21,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 import md2json from 'md-2-json'
+import Vue from 'vue'
 
 export default {
     data: () => ({
@@ -39,7 +40,11 @@ export default {
             let [fileHandle] = await window.showOpenFilePicker()
             const fileData = await fileHandle.getFile();
             let text = await fileData.text();
-            
+            Vue.prototype.$text = text
+            // this.$router.push({
+            //     name: "viewerPage",
+            //     params: { text }
+            // });
             // const { metadata, content } = parseMD(fileData)
             let objOne = md2json.parse(text)
             let json = JSON.parse(JSON.stringify(objOne))

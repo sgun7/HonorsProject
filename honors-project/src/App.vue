@@ -49,6 +49,14 @@
             >
               mdi-account
         </v-icon>
+        <v-icon
+              dark
+              right
+              x-large
+              @click="viewerPage()"
+            >
+             mdi-archive
+        </v-icon>
         <v-btn
          color="#E9D8A6"
          ><h2 class="signInButton" @click="logOut()">Log Out</h2></v-btn>
@@ -62,6 +70,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -96,6 +105,9 @@ export default {
     userPage(){
     this.$router.push('/userPage'); 
     },
+    viewerPage(){
+    this.$router.push('/viewerPage'); 
+    },
 
     signIn()
       {
@@ -106,7 +118,7 @@ export default {
       firebase
         .auth()
         .signOut()
-        .then(()=> console.log("Signed out"))
+        .then(()=> Vue.prototype.$text = '')
         .catch(err => alert(err.message));
     }
   }
